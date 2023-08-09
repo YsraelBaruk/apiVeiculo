@@ -1,10 +1,8 @@
 <?php
 class ViewVeiculo{
-
     public function exibir($retorno){
         echo json_encode($retorno);
     }
-    
     public function exibirVeiculos($veiculos){
         if($veiculos){
             http_response_code(200);
