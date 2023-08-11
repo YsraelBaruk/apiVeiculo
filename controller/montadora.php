@@ -26,7 +26,8 @@ function post($dados_montadora){
     $viewMontadora = new viewMontadora();
     $montadora->nome = $dados_montadora->nome;
     $montadora->logotipo = $dados_montadora->logotipo;
-    $viewMontadora->exibirMontadora($montadora->cadastrar());
+    $result = $montadora->cadastrar();
+    $viewMontadora->exibirMontadoraCadastrada($result);
 }
 
 switch($method){

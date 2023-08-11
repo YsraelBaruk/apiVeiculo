@@ -20,10 +20,16 @@ class Montadora {
     public function cadastrar() {
         try {
             $cmdSql = "INSERT INTO montadora (nome, logotipo) VALUES (:nome, :logotipo)";
-            $cx_declarada = $this->cx()->prepare($cmdSql);
+            $pdo = $this->cx();
+            $cx_declarada = $pdo->prepare($cmdSql);
             $cx_declarada->bindParam(':nome', $this->nome);
             $cx_declarada->bindParam(':logotipo', $this->logotipo);            
-            return $cx_declarada->execute();
+            $cx_declarada->execute();
+            if($this->consultarPorId($pdo->lastInsertId())){
+                return $this;
+            }
+            $this->erro = "Erro ao cadastrar montadora: " . $e->getMessage();
+            return false;
         } catch (\PDOException $e) {
             $this->erro = "Erro ao cadastrar montadora: " . $e->getMessage();
             return false;

@@ -34,4 +34,19 @@ class ViewMontadora{
         }
         $this->exibir($retorno);
     }
+    public function exibirMontadoraCadastrada($montadora){
+        if($montadora){
+            http_response_code(200);
+            $retorno["result"] = true;
+            $retorno["dados"] = $montadora;
+            $retorno["itens"] = 1;
+        }else{
+            http_response_code(404);
+            $retorno["result"] = false;
+            $retorno["dados"] = '';
+            $retorno["itens"] = 0;
+            $retorno["info"] = "Já cadastrado";
+        }
+        $this->exibir($retorno);
+    }
 }
