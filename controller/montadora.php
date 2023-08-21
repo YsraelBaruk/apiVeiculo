@@ -8,8 +8,9 @@ function get($consulta, $valor=''){
     $montadora = new Montadora();
     $viewMontadora = new ViewMontadora();
     if($consulta == 'id'){
-        $montadora = $montadora->consultarPorId($valor);
-        $viewMontadora->exibirMontadora($montadora);
+        // $montadora->consultarPorId($valor);
+        $montId = $montadora->consultarPorId($valor);
+        $viewMontadora->exibirMontadora($montId);
     }                                               
     else if($consulta == 'nome'){
         $montadoras = $montadora->consultar($valor);

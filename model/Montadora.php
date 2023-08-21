@@ -25,8 +25,9 @@ class Montadora {
             $cx_declarada->bindParam(':nome', $this->nome);
             $cx_declarada->bindParam(':logotipo', $this->logotipo);            
             $cx_declarada->execute();
-            if($this->consultarPorId($pdo->lastInsertId())){
-                return $this;
+            $m = $this->consultarPorId($pdo->lastInsertId());
+            if($m){
+                return $m;
             }
             $this->erro = "Erro ao cadastrar montadora: " . $e->getMessage();
             return false;
@@ -86,6 +87,25 @@ class Montadora {
         $this->data_alteracao = $m->data_alteracao;
     }
 
+    // public function consultarPorId($id) {
+    //     try {
+    //         $cmdSql = "SELECT * FROM montadora WHERE montadora.id = :id";
+    //         $cx_declarada = $this->cx()->prepare($cmdSql);
+    //         $cx_declarada->bindParam('id', $id);          
+    //         $cx_declarada->execute();
+    //         $cx_declarada->setFetchMode(PDO::FETCH_CLASS, __CLASS__);
+    //         $m = $cx_declarada->fetch();
+    //         if($m){
+    //             $this->carregar($m);
+    //             return true;
+    //         }
+    //         return false;
+    //     } catch (\PDOException $e) {
+    //         $this->erro = "Erro ao consultar montadora por id: " . $e->getMessage();
+    //         return false;
+    //     }
+    // }
+
     public function consultarPorId($id) {
         try {
             $cmdSql = "SELECT * FROM montadora WHERE montadora.id = :id";
@@ -93,15 +113,11 @@ class Montadora {
             $cx_declarada->bindParam('id', $id);          
             $cx_declarada->execute();
             $cx_declarada->setFetchMode(PDO::FETCH_CLASS, __CLASS__);
-            $m = $cx_declarada->fetch();
-            if($m){
-                $this->carregar($m);
-                return true;
-            }
-            return false;
+            return $cx_declarada->fetch();           
         } catch (\PDOException $e) {
-            $this->erro = "Erro ao consultar montadora: " . $e->getMessage();
+            $this->erro = "Erro ao consultar categoria: " . $e->getMessage();
             return false;
         }
     }
+
 }
