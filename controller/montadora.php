@@ -7,18 +7,17 @@ array_shift($url);
 function get($consulta, $valor=''){
     $montadora = new Montadora();
     $viewMontadora = new ViewMontadora();
-    if($consulta == 'id'){
-        // $montadora->consultarPorId($valor);
-        $montId = $montadora->consultarPorId($valor);
-        $viewMontadora->exibirMontadora($montId);
-    }                                               
-    else if($consulta == 'nome'){
-        $montadoras = $montadora->consultar($valor);
+    if(count($consulta) == 1 && $consulta[0] == ""){
+        $montadoras = $veiculo->consultar();
         $viewMontadora->exibirMontadoras($montadoras);
     }
-    else if(){
-        $montadoras = $montadora->consultar();
-        $viewMontadora->exibirMontadora($montadoras);
+    elseif(count($consulta) == 1){
+        $montadora = $montadora->consultarPorId($consulta[0]);
+        $viewMontadora->exibirMontadora($montadora);
+    }    
+    elseif(count($consulta) == 2 && $consulta[0] == "modelo"){       
+        $montadoras = $montadora->consultar($consulta[1]);
+        $viewMontadora->exibirMontadoras($montadoras);
     }
     else{
         $codigo_resposta = 404;
@@ -27,29 +26,7 @@ function get($consulta, $valor=''){
             'erro'  => 'Erro: 404 - Recurso não encontrado'
         ];
         require_once 'view/erro404.php';
-    }  
-
-    // if(count($consulta) == 1 && $consulta[0] == ""){
-    //     // $montadora->consultarPorId($valor);
-    //     $montId = $montadora->consultarPorId($consulta[0]);
-    //     $viewMontadora->exibirMontadora($montId);
-    // }                                               
-    // else if(count($consulta) == 1){
-    //     $montadoras = $montadora->consultar($valor);
-    //     $viewMontadora->exibirMontadoras($montadoras);
-    // }
-    // else if(count($consulta) == 2 && $consulta[0] == "modelo"){
-    //     $montadoras = $montadora->consultar();
-    //     $viewMontadora->exibirMontadora($montadoras);
-    // }
-    // else{
-    //     $codigo_resposta = 404;
-    //     $erro = [
-    //         'result'=>false,
-    //         'erro'  => 'Erro: 404 - Recurso não encontrado'
-    //     ];
-    //     require_once 'view/erro404.php';
-    // }  
+    } 
 }
 
 function post($dados_montadora){
@@ -73,7 +50,7 @@ function put($registro, $dados_montadora){
 }
 
 switch($method){
-    case "GET":get(@$url[0],@$url[1]);
+    case "GET":get($url);
     break;
     case "POST":post($dadosRecebidos);
     break;
