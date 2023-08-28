@@ -31,14 +31,23 @@ function post($dados_montadora){
     $viewMontadora->exibirMontadoraCadastrada($result);
 }
 
+function put($registro, $dados_montadora){
+    $montadora = new Montadora();
+    $viewMontadora = new ViewMontadora();
+
+    $montadora->id = $registro;
+    $montadora->nome = $dados_montadora->nome;
+    $montadora->logotipo = $dados_montadora->$logotipo;
+    $result = $montadora->alterar();
+    $viewMontadora->exibirMontadoraCadastrada($result);
+}
+
 switch($method){
     case "GET":get(@$url[0],@$url[1]);
     break;
     case "POST":post($dadosRecebidos);
     break;
-    case "PUT":{
-        echo json_encode(["method"=>"PUT"]);
-    }
+    case "PUT":put(@$url[0],$dadosRecebidos);
     break;
     case "DELETE":{
         echo json_encode(["method"=>"DELETE"]);
