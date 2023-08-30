@@ -80,6 +80,25 @@ class Categoria {
         $this->data_alteracao = $c->data_alteracao;
     }
 
+    // public function consultarPorId($id) {
+    //     try {
+    //         $cmdSql = "SELECT * FROM categoria WHERE categoria.id = :id";
+    //         $cx_declarada = $this->cx()->prepare($cmdSql);
+    //         $cx_declarada->bindParam('id', $id);          
+    //         $cx_declarada->execute();
+    //         $cx_declarada->setFetchMode(PDO::FETCH_CLASS, __CLASS__);
+    //         $c = $cx_declarada->fetch();
+    //         if($c){
+    //             $this->carregar($c);
+    //             return true;
+    //         }
+    //         return false;
+    //     } catch (\PDOException $e) {
+    //         $this->erro = "Erro ao consultar categoria: " . $e->getMessage();
+    //         return false;
+    //     }
+    // }
+
     public function consultarPorId($id) {
         try {
             $cmdSql = "SELECT * FROM categoria WHERE categoria.id = :id";
@@ -87,12 +106,7 @@ class Categoria {
             $cx_declarada->bindParam('id', $id);          
             $cx_declarada->execute();
             $cx_declarada->setFetchMode(PDO::FETCH_CLASS, __CLASS__);
-            $c = $cx_declarada->fetch();
-            if($c){
-                $this->carregar($c);
-                return true;
-            }
-            return false;
+            return $cx_declarada->fetch();           
         } catch (\PDOException $e) {
             $this->erro = "Erro ao consultar categoria: " . $e->getMessage();
             return false;

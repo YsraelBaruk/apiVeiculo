@@ -115,7 +115,7 @@ class Montadora {
             $cx_declarada->setFetchMode(PDO::FETCH_CLASS, __CLASS__);
             return $cx_declarada->fetch();           
         } catch (\PDOException $e) {
-            $this->erro = "Erro ao consultar categoria: " . $e->getMessage();
+            $this->erro = "Erro ao consultar montadora: " . $e->getMessage();
             return false;
         }
     }
