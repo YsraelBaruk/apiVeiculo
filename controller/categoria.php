@@ -39,6 +39,17 @@ function post($dadosRecebidos){
     $viewCategoria->exibirCategoriaCadastrada($result);
 }
 
+function put($registro, $dadosRecebidos){
+    $categoria = new Categoria();
+    $viewCategoria = new ViewCategoria();
+
+    $categoria->id = $registro;
+    $categoria->tipo = $dadosRecebidos->tipo;
+    $categoria->icone = $dadosRecebidos->icone;
+    $result = $categoria->alterar();
+    $viewCategoria->exibirCategoriaCadastrada($result);
+}
+
 switch($method){
     case "GET":get($url);
     break;
