@@ -4,18 +4,18 @@ require_once 'view/Montadora.php';
 
 array_shift($url);
 
-function get($consulta, $valor=''){
+function get($consulta){
     $montadora = new Montadora();
     $viewMontadora = new ViewMontadora();
     if(count($consulta) == 1 && $consulta[0] == ""){
-        $montadoras = $veiculo->consultar();
+        $montadoras = $montadora->consultar();
         $viewMontadora->exibirMontadoras($montadoras);
     }
     elseif(count($consulta) == 1){
         $montadora = $montadora->consultarPorId($consulta[0]);
         $viewMontadora->exibirMontadora($montadora);
     }    
-    elseif(count($consulta) == 2 && $consulta[0] == "modelo"){       
+    elseif(count($consulta) == 2 && $consulta[0] == "nome"){       
         $montadoras = $montadora->consultar($consulta[1]);
         $viewMontadora->exibirMontadoras($montadoras);
     }
@@ -26,8 +26,8 @@ function get($consulta, $valor=''){
             'erro'  => 'Erro: 404 - Recurso não encontrado'
         ];
         require_once 'view/erro404.php';
-    } 
-}
+    }   
+} 
 
 function post($dados_montadora){
     $montadora = new Montadora();
