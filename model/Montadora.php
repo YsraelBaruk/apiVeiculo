@@ -52,11 +52,11 @@ class Montadora {
         }
     }
 
-    public function excluir() {
+    public function excluir($id) {
 		try {
             $cmdSql = "DELETE FROM montadora WHERE montadora.id = :id";
             $cx_declarada = $this->cx()->prepare($cmdSql);
-            $cx_declarada->bindParam(':id', $this->id);            
+            $cx_declarada->bindParam(':id', $id);            
             $cx_declarada->execute();
             return ($cx_declarada->rowCount() != 0);
         } catch (PDOException $e) {
