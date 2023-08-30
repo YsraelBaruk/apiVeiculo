@@ -29,6 +29,16 @@ function get($consulta){
     }   
 }
 
+function post($dadosRecebidos){
+    $categoria = new Categoria();
+    $viewCategoria = new ViewCategoria();
+
+    $categoria->tipo = $dadosRecebidos->tipo;
+    $categoria->icone = $dadosRecebidos->icone;
+    $result = $categoria->cadastrar();
+    $viewCategoria->exibirCategoriaCadastrada($result);
+}
+
 switch($method){
     case "GET":get($url);
     break;

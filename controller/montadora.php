@@ -28,7 +28,7 @@ function get($consulta){
         require_once 'view/erro404.php';
     }   
 } 
-
+ 
 function post($dados_montadora){
     $montadora = new Montadora();
     $viewMontadora = new viewMontadora();

@@ -20,10 +20,17 @@ class Categoria {
         try {
 
             $cmdSql = "INSERT INTO categoria(tipo, icone) VALUES (:tipo, :icone)";
-            $cx_declarada = $this->cx()->prepare($cmdSql);
+            $pdo = $this->cx();
+            $cx_declarada = $pdo->prepare($cmdSql);
             $cx_declarada->bindParam('tipo', $this->tipo);
             $cx_declarada->bindParam('icone', $this->icone);            
-            return $cx_declarada->execute();
+            $cx_declarada->execute();
+            $c = $this->consultarPorId($pdo->lastInsertId());
+            if($c){
+                return $c;
+            }
+            $this->erro = "Erro ao cadastrar a categoria: " . $e->getMessage();
+            return false;
         } catch (\PDOException $e) {
             $this->erro = "Erro ao cadastrar categoria: " . $e->getMessage();
             return false;

@@ -35,7 +35,7 @@ class ViewMontadora{
         $this->exibir($retorno);
     }
     public function exibirMontadoraCadastrada($montadora){
-        if($montadora){
+        if($montadora){ 
             http_response_code(200);
             $retorno["result"] = true;
             $retorno["dados"] = $montadora;
