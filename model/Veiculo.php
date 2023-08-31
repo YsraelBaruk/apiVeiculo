@@ -65,7 +65,8 @@ class Veiculo {
             $cx_declarada->bindParam('tipo_direcao', $this->tipo_direcao);  
             $cx_declarada->bindParam(':id', $this->id);
             $cx_declarada->execute();
-            return ($cx_declarada->rowCount() != 0);
+            $alteracao = ($cx_declarada->rowCount() != 0);
+            return $alteracao;
         } catch (PDOException $e) {
             $this->erro = "Erro ao alterar veículo: " . $e->getMessage();
             return false;
