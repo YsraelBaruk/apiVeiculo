@@ -57,7 +57,7 @@ class Categoria {
 		try {
             $cmdSql = "DELETE FROM categoria WHERE categoria.id = :id";
             $cx_declarada = $this->cx()->prepare($cmdSql);
-            $cx_declarada->bindParam(':id', $id);            
+            $cx_declarada->bindParam(':id', $this->id);            
             $cx_declarada->execute();
             return ($cx_declarada->rowCount() != 0);
         } catch (PDOException $e) {
