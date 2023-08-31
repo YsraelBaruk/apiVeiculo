@@ -75,7 +75,8 @@ function put($registro, $dados_veiculo){
     $veiculo->montadora_id      = $dados_veiculo->montadora_id;
     $veiculo->tipo_cambio       = $dados_veiculo->tipo_cambio;
     $veiculo->tipo_direcao      = $dados_veiculo->tipo_direcao;    
-    $viewVeiculo->exibirVeiculo($veiculo->alterar());
+    $put = $veiculo->alterar();
+    $viewVeiculo->exibirVeiculo($put);
 }
 
 switch($method){    
