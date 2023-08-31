@@ -66,7 +66,7 @@ class Veiculo {
             $cx_declarada->bindParam(':id', $this->id);
             $cx_declarada->execute();
             return ($cx_declarada->rowCount() != 0);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->erro = "Erro ao alterar veículo: " . $e->getMessage();
             return false;
         }
@@ -79,7 +79,7 @@ class Veiculo {
             $cx_declarada->bindParam(':id', $id);            
             $cx_declarada->execute();
             return ($cx_declarada->rowCount() != 0);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->erro = "Erro ao excluir veículo. Código do erro: {$e->getCode()}";
             return false;
         }
@@ -92,7 +92,7 @@ class Veiculo {
             $stmt->bindValue(':filtro', '%'.$filtro.'%');
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_CLASS, __CLASS__);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             echo "Erro ao consultar montadora por nome: " . $e->getMessage();
             return false;
         }
