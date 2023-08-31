@@ -41,12 +41,10 @@ function post($dados_montadora){
 function put($registro, $dados_montadora){
     $montadora = new Montadora();
     $viewMontadora = new ViewMontadora();
-
     $montadora->id       = $registro;
     $montadora->nome     = $dados_montadora->nome;
     $montadora->logotipo = $dados_montadora->logotipo;
-    $result = $montadora->alterar();
-    $viewMontadora->exibirMontadoraCadastrada($result);
+    $viewMontadora->exibirMontadora($montadora->alterar());
 }
 
 function delete($registro){
