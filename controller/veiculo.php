@@ -52,7 +52,7 @@ function delete($registro){
     $result = false;
     $erro = "";
     if($veiculo->excluir($registro)){
-        $result = true;
+        $result = true;        
     }
     else{
         $erro = $veiculo->getErro();

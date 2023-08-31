@@ -57,6 +57,7 @@ function delete($registro){
     $erro = "";
     if($categoria->excluir($registro)){
         $result = true;
+        var_dump($result);
     }
     else{
         $erro = $categoria->getErro();
