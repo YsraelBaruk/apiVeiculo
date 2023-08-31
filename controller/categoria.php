@@ -50,6 +50,21 @@ function put($registro, $dadosRecebidos){
     $viewCategoria->exibirCategoriaCadastrada($result);
 }
 
+function delete($registro){
+    $categoria = new Categoria();
+    $viewCategoria = new ViewCategoria();
+    $result = false;
+    $erro = "";
+    if($categoria->excluir($registro)){
+        $result = true;
+    }
+    else{
+        $erro = $categoria->getErro();
+    }
+    $viewCategoria->deleteCategoria($result, $erro);
+
+}
+
 switch($method){
     case "GET":get($url);
     break;

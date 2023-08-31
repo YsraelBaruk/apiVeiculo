@@ -40,12 +40,13 @@ class Categoria {
     public function alterar() {
 		try {
             $cmdSql = "UPDATE categoria SET tipo = :tipo, icone = :icone WHERE categoria.id = :id";
-            $cx_declarada = $this->cx()->prepare($cmdSql);
+            $cx_declarada = $this->cx();
+            $cx_declarada = $pdo->prepare($cmdSql);
             $cx_declarada->bindParam(':tipo', $this->tipo);
             $cx_declarada->bindParam(':icone', $this->icone);
             $cx_declarada->bindParam(':id', $this->id);
             $cx_declarada->execute();
-            return ($cx_declarada->rowCount() != 0);
+            return $this->consultarPorId($this->id);
         } catch (PDOException $e) {
             $this->erro = "Erro ao alterar categoria: " . $e->getMessage();
             return false;
