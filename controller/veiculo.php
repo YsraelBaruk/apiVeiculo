@@ -63,7 +63,7 @@ function delete($registro){
 
 function put($registro, $dados_veiculo){
     $veiculo = new Veiculo();
-    $viewVeiculo = new ViewVeiculo(); 
+    $viewVeiculo = new ViewVeiculo();   
     $veiculo->id                = $registro;
     $veiculo->modelo            = $dados_veiculo->modelo;
     $veiculo->ano_fabricacao    = $dados_veiculo->ano_fabricacao;
