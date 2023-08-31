@@ -79,7 +79,7 @@ class Veiculo {
             $cx_declarada->bindParam(':id', $id);            
             $cx_declarada->execute();
             return ($cx_declarada->rowCount() != 0);
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $this->erro = ["Erro ao excluir veículo", "Código do erro: {$e->getCode()}", "{$e->getMessage()}"];
             return false;
         }
