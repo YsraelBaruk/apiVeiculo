@@ -92,7 +92,7 @@ class Veiculo {
             $stmt->bindValue(':filtro', '%'.$filtro.'%');
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_CLASS, __CLASS__);
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             echo "Erro ao consultar montadora por nome: " . $e->getMessage();
             return false;
         }
@@ -124,7 +124,7 @@ class Veiculo {
             $cx_declarada->setFetchMode(PDO::FETCH_CLASS, __CLASS__);
             return $cx_declarada->fetch();           
         } catch (\PDOException $e) {
-            $this->erro = "Erro ao consultar veiculo: " . $e->getMessage();
+            $this->erro = "Erro ao consultar categoria: " . $e->getMessage();
             return false;
         }
     }
