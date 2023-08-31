@@ -51,7 +51,8 @@ class Veiculo {
     public function alterar() {
 		try {
             $cmdSql = 'UPDATE veiculo SET modelo = :modelo ,ano_fabricacao = :ano_fabricacao ,ano_modelo = :ano_modelo ,cor = :cor ,num_portas = :num_portas ,foto = :foto ,categoria_id = :categoria_id ,montadora_id = :montadora_id ,tipo_cambio = :tipo_cambio ,tipo_direcao = :tipo_direcao WHERE veiculo.id = :id';
-            $cx_declarada = $this->cx()->prepare($cmdSql);
+            $pdo = $this->cx();
+            $cx_declarada = $pdo->prepare($cmdSql);
             $cx_declarada->bindParam('modelo', $this->modelo);            
             $cx_declarada->bindParam('ano_fabricacao', $this->ano_fabricacao);            
             $cx_declarada->bindParam('ano_modelo', $this->ano_modelo);            
