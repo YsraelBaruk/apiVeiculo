@@ -53,7 +53,7 @@ class Categoria {
         }
     }
 
-    public function excluir() {
+    public function excluir($id) {
 		try {
             $cmdSql = "DELETE FROM categoria WHERE categoria.id = :id";
             $cx_declarada = $this->cx()->prepare($cmdSql);
