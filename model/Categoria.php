@@ -40,7 +40,7 @@ class Categoria {
     public function alterar() {
 		try {
             $cmdSql = "UPDATE categoria SET tipo = :tipo, icone = :icone WHERE categoria.id = :id";
-            $cx_declarada = $this->cx();
+            $pdo = $this->cx();
             $cx_declarada = $pdo->prepare($cmdSql);
             $cx_declarada->bindParam(':tipo', $this->tipo);
             $cx_declarada->bindParam(':icone', $this->icone);
