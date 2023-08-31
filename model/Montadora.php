@@ -40,17 +40,34 @@ class Montadora {
     public function alterar() {
 		try {
             $cmdSql = "UPDATE montadora SET nome = :nome, logotipo = :logotipo WHERE montadora.id = :id";
-            $cx_declarada = $this->cx()->prepare($cmdSql);
+            $pdo = $this->cx();
+            $cx_declarada = $pdo->prepare($cmdSql);
             $cx_declarada->bindParam(':nome', $this->nome);
             $cx_declarada->bindParam(':logotipo', $this->logotipo);
             $cx_declarada->bindParam(':id', $this->id);
             $cx_declarada->execute();
-            return $cx_declarada->rowCount() != 0;
+            return $cx_declarada->consultarPorId($this->id);
         } catch (PDOException $e) {
             $this->erro = "Erro ao alterar montadora: " . $e->getMessage();
             return false;
         }
     }
+
+    // public function alterar() {
+	// 	try {
+    //         $cmdSql = "UPDATE categoria SET tipo = :tipo, icone = :icone WHERE categoria.id = :id";
+    //         $pdo = $this->cx();
+    //         $cx_declarada = $pdo->prepare($cmdSql);
+    //         $cx_declarada->bindParam(':tipo', $this->tipo);
+    //         $cx_declarada->bindParam(':icone', $this->icone);
+    //         $cx_declarada->bindParam(':id', $this->id);
+    //         $cx_declarada->execute();
+    //         return $this->consultarPorId($this->id);
+    //     } catch (PDOException $e) {
+    //         $this->erro = "Erro ao alterar categoria: " . $e->getMessage();
+    //         return false;
+    //     }
+    // }
 
     public function excluir($id) {
 		try {
