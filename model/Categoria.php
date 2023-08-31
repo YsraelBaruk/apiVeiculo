@@ -61,7 +61,7 @@ class Categoria {
             $cx_declarada->execute();
             return ($cx_declarada->rowCount() != 0);
         } catch (PDOException $e) {
-            $this->erro = "Erro ao excluir categoria. Código do erro: {$e->getCode()}";
+            $this->erro = ["Erro ao excluir categoria", "Código do erro: {$e->getCode()}", "{$e->getMessage()}"];
             return false;
         }
     }
