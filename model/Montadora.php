@@ -46,8 +46,11 @@ class Montadora {
             $cx_declarada->bindParam(':logotipo', $this->logotipo);
             $cx_declarada->bindParam(':id', $this->id);
             $cx_declarada->execute();
-            $m = $cx_declarada->consultarPorId($this->id);
-            return $m;
+            // $m = $this->consultarPorId($this->id);
+            // if($m){
+            //     return $m;
+            // }
+            return $this->consultarPorId($this->id);
         } catch (PDOException $e) {
             $this->erro = "Erro ao alterar montadora: " . $e->getMessage();
             return false;
@@ -73,7 +76,8 @@ class Montadora {
     public function excluir($id) {
 		try {
             $cmdSql = "DELETE FROM montadora WHERE montadora.id = :id";
-            $cx_declarada = $this->cx()->prepare($cmdSql);
+            $pdo = $this->cx();
+            $cx_declarada = $pdo->prepare($cmdSql);
             $cx_declarada->bindParam(':id', $id);            
             $cx_declarada->execute();
             return ($cx_declarada->rowCount() != 0);
