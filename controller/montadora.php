@@ -44,7 +44,8 @@ function put($registro, $dados_montadora){
     $montadora->id       = $registro;
     $montadora->nome     = $dados_montadora->nome;
     $montadora->logotipo = $dados_montadora->logotipo;
-    $viewMontadora->exibirMontadora($montadora->alterar());
+    $result = $montadora->alterar();
+    $viewMontadora->exibirMontadora($result);
 }
 
 function delete($registro){

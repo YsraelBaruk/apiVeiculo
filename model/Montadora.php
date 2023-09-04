@@ -40,13 +40,14 @@ class Montadora {
     public function alterar() {
 		try {
             $cmdSql = "UPDATE montadora SET nome = :nome, logotipo = :logotipo WHERE montadora.id = :id";
-            $pdo = $this->cx();
-            $cx_declarada = $pdo->prepare($cmdSql);
+            $cx_declarada = $this->cx()->prepare($cmdSql);
+            // $cx_declarada = $pdo->prepare($cmdSql);
             $cx_declarada->bindParam(':nome', $this->nome);
             $cx_declarada->bindParam(':logotipo', $this->logotipo);
             $cx_declarada->bindParam(':id', $this->id);
             $cx_declarada->execute();
-            return $cx_declarada->consultarPorId($this->id);
+            $m = $cx_declarada->consultarPorId($this->id);
+            return $m;
         } catch (PDOException $e) {
             $this->erro = "Erro ao alterar montadora: " . $e->getMessage();
             return false;
